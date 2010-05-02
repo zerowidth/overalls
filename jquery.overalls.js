@@ -30,7 +30,7 @@
 
       this.setContent(html);
 
-      transparency.stop().fadeTo('normal', this.options.opacity)
+      transparency.stop().fadeTo(this.options.speed, this.options.opacity)
         .bind('click.overalls', function() { self.close(); });
       $(document).bind('keyup.overalls', function(e) {
         if (e.keyCode == 27) { self.close(); };
@@ -42,7 +42,7 @@
     // replace an existing overalls overlay
     replace: function(html, callback) {
       var self = this;
-      $('#overalls-container').stop().fadeTo('normal', 0, function() {
+      $('#overalls-container').stop().fadeTo(this.options.speed, 0, function() {
         $(this).html('');
         self.setContent(html);
         var transparency = $('#overalls-transparency');
@@ -61,8 +61,8 @@
       $('#overalls-transparency')
         .unbind('.overalls') // click handler
         .stop(true)
-        .fadeOut('normal');
-      $('#overalls-container').stop(true).fadeOut('normal', function() {
+        .fadeOut(this.options.speed);
+      $('#overalls-container').stop(true).fadeOut(this.options.speed, function() {
         $(this).remove();
       });
     },
@@ -130,7 +130,7 @@
     },
 
     showContent: function(callback) {
-      $('#overalls-container').stop().fadeTo('normal', 1.0, function() {
+      $('#overalls-container').stop().fadeTo(this.options.speed, 1.0, function() {
         if(callback) { callback.apply($('#overalls-overlay'), []); };
       });
     },
@@ -168,7 +168,8 @@
     blank: false,
     cssClass: null,
     width: '650px',
-    height: '350px'
+    height: '350px',
+    speed: 'normal'
   }
 
   function log() {
